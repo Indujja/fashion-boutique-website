@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Dresses</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>All Dresses</h1>
+    <div class="dress-container">
+        <% dresses.forEach(dress => { %>
+            <div class="dress-card">
+                <img src="<%= dress.imageUrl %>" alt="<%= dress.name %>" class="dress-image" data-description="<%= dress.description %>">
+                <div class="dress-name"><%= dress.name %></div>
+                <div class="dress-price">$<%= dress.price.toFixed(2) %></div>
+                <div class="dress-actions">
+                    <a href="/update/<%= dress._id %>" class="edit-btn">Edit</a>
+                    <a href="/delete/<%= dress._id %>" class="delete-btn" onclick="return confirm('Are you sure you want to delete this dress?')">Delete</a>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+    <div id="descriptionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalDressName"></h2>
+            <p id="modalDressDescription"></p>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("descriptionModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        document.querySelectorAll('.dress-image').forEach(img => {
+            img.onclick = function() {
+                var dressName = this.parentElement.querySelector('.dress-name').textContent;
+                var dressDescription = this.getAttribute('data-description');
+                document.getElementById("modalDressName").textContent = dressName;
+                document.getElementById("modalDressDescription").textContent = dressDescription;
+                modal.style.display = "block";
+            }
+        });
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

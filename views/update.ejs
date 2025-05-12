@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Dress</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Update Dress</h2>
+        <form action="/update/<%= dress._id %>" method="POST">
+            <label for="name">Dress Name</label>
+            <input type="text" id="name" name="name" value="<%= dress.name %>" required>
+            
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" value="<%= dress.price %>" step="0.01" required>
+            
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3" required><%= dress.description %></textarea>
+            
+            <label for="imageUrl">Image URL</label>
+            <input type="url" id="imageUrl" name="imageUrl" value="<%= dress.imageUrl %>" required>
+            
+            <button type="submit">Update</button>
+        </form>
+    </div>
+</body>
+</html>
